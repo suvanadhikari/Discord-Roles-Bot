@@ -7,7 +7,7 @@ from keep_alive import keep_alive
 BOT_ID = os.environ.get("ROLE_BOT_ID")
 client = discord.Client()
 
-help_txt = "Commands list:\n!help: Displays this menu\n\n!roles: Used to assign roles to a group. Format: !roles @person1 @person2 / role1:[number] role2:[number]"
+help_txt = "Commands list:\n\n!help: Displays this menu\n!roles: Used to assign roles to a group. Format: !roles @person1 @person2 / role1:[number] role2:[number]"
 
 def get_roles(msg):
     message = msg.content
@@ -67,7 +67,7 @@ async def on_message(message):
         if message.author == client.user:
             return
         for cmd in cmds:
-            cmd(message)
+            await cmd(message)
         
     except Exception as e:
         print(e)
