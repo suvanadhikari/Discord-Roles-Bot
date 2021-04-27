@@ -1,0 +1,3 @@
+!cmdhelp: Displays details about a command. Use !cmdhelp [command name]
+!help: Displays this menu
+!roles: Used to assign roles to a group.

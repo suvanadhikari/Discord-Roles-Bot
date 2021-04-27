@@ -1,0 +1,3 @@
+!cmdhelp [command]
+!help
+!roles @[person1] @[person2] / [role1]:[number] [role2]:[number]

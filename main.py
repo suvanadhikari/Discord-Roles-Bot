@@ -7,7 +7,33 @@ from keep_alive import keep_alive
 BOT_ID = os.environ.get("ROLE_BOT_ID")
 client = discord.Client()
 
-help_txt = "Commands list:\n\n!help: Displays this menu\n!roles: Used to assign roles to a group. Format: !roles @person1 @person2 / role1:[number] role2:[number]"
+desc_file = open("commandDescriptions.txt", "r")
+format_file = open("commandFormats.txt", "r")
+
+desc_txt = desc_file.read()
+help_txt = "Commands list:\n\n" + desc_txt
+lines = desc_txt.splitlines()
+cmd_dicts = [{"name":line.split(":")[0], "desc":line.split(":")[1].strip()} for line in lines]
+cmd_formats = [line.strip() for line in format_file.readlines()]
+
+def get_cmd_info(cmd):
+    if not cmd.startswith("!"):
+        cmd = "!" + cmd
+    for index, cmd_dict in enumerate(cmd_dicts):
+        if cmd_dict["name"] == cmd:
+            return {"name":cmd_dict["name"], "desc":cmd_dict["desc"], "format":cmd_formats[index]}
+    return None
+
+async def cmdhelp_cmd(message):
+    message = message.content
+    if (not message.startswith("!cmdhelp ")):
+        return
+    cmd = message[9:].strip()
+    cmd_info = get_cmd_info(cmd)
+    if (cmd_info == None):
+        await message.channel.send("Given command does not exist.")
+    else:
+        await message.channel.send(f"{cmd_info['name']}: {cmd_info['desc']}\nFormat: {cmd_info['format']}")
 
 def get_roles(msg):
     message = msg.content
@@ -55,7 +81,7 @@ async def help_cmd(message):
         return
     await message.channel.send(help_txt)
 
-cmds = [roles_cmd, help_cmd]
+cmds = [roles_cmd, help_cmd, cmdhelp_cmd]
 
 @client.event
 async def on_ready():
