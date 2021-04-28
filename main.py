@@ -82,7 +82,7 @@ async def help_cmd(message):
     embed = discord.Embed()
     field_value = ""
     for cmd_dict in cmd_dicts:
-        field_value += f"**{cmd_dict['name']}**: {cmd_dict['desc']}\n"
+        field_value += f"**{cmd_dict['name']}:** {cmd_dict['desc']}\n"
     embed.add_field(name="Command List", value=field_value[:-1])
     await message.channel.send(embed=embed)
 
