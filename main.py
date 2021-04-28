@@ -10,9 +10,7 @@ client = discord.Client()
 desc_file = open("commandDescriptions.txt", "r")
 format_file = open("commandFormats.txt", "r")
 
-desc_txt = desc_file.read()
-help_txt = "Commands list:\n\n" + desc_txt
-lines = desc_txt.splitlines()
+lines = desc_file.readlines()
 cmd_dicts = [{"name":line.split(":")[0], "desc":line.split(":")[1].strip()} for line in lines]
 cmd_formats = [line.strip() for line in format_file.readlines()]
 
@@ -81,7 +79,10 @@ async def roles_cmd(message):
 async def help_cmd(message):
     if not message.content.startswith("!help"):
         return
-    await message.channel.send(help_txt)
+    embed = discord.Embed(name="Command List", description="Listed below are all commands for this bot.")
+    for cmd_dict in cmd_dicts:
+        embed.add_field(description=cmd_dict['name'] + ": " + cmd_dict['desc'])
+    await message.channel.send(embed=embed)
 
 cmds = [roles_cmd, help_cmd, cmdhelp_cmd]
 
