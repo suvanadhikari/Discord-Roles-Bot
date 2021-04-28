@@ -33,7 +33,9 @@ async def cmdhelp_cmd(msg):
     if (cmd_info == None):
         await msg.channel.send("Given command does not exist.")
     else:
-        await msg.channel.send(f"{cmd_info['name']}: {cmd_info['desc']}\nFormat: {cmd_info['format']}")
+        embed = discord.Embed(title="Command Help")
+        embed.add_field(name=f"Command Help for {cmd_info['name']}", value=f"{cmd_info['desc']}\nFormat: {cmd_info['format']}")
+        await msg.channel.send(embed=embed)
 
 def get_roles(msg):
     message = msg.content
