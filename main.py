@@ -81,7 +81,7 @@ async def help_cmd(message):
         return
     embed = discord.Embed(name="Command List", description="Listed below are all commands for this bot.")
     for cmd_dict in cmd_dicts:
-        embed.add_field(description=cmd_dict['name'] + ": " + cmd_dict['desc'])
+        embed.add_field(value=cmd_dict['name'] + ": " + cmd_dict['desc'])
     await message.channel.send(embed=embed)
 
 cmds = [roles_cmd, help_cmd, cmdhelp_cmd]
