@@ -31,7 +31,7 @@ async def cmdhelp_cmd(msg):
     if (cmd_info == None):
         await msg.channel.send("Given command does not exist.")
     else:
-        embed = discord.Embed(title="Command Help")
+        embed = discord.Embed()
         embed.add_field(name=f"Command Help for {cmd_info['name']}", value=f"{cmd_info['desc']}\nFormat: {cmd_info['format']}")
         await msg.channel.send(embed=embed)
 
@@ -79,7 +79,7 @@ async def roles_cmd(message):
 async def help_cmd(message):
     if not message.content.startswith("!help"):
         return
-    embed = discord.Embed(title="Command List", description="Listed below are all commands for this bot.")
+    embed = discord.Embed(description="Listed below are all commands for this bot.")
     field_value = ""
     for cmd_dict in cmd_dicts:
         field_value += cmd_dict['name'] + ": " + cmd_dict['desc'] + "\n"
