@@ -79,11 +79,11 @@ async def roles_cmd(message):
 async def help_cmd(message):
     if not message.content.startswith("!help"):
         return
-    embed = discord.Embed(description="Listed below are all commands for this bot.")
+    embed = discord.Embed()
     field_value = ""
     for cmd_dict in cmd_dicts:
-        field_value += cmd_dict['name'] + ": " + cmd_dict['desc'] + "\n"
-    embed.add_field(name="Commands", value=field_value[:-1])
+        field_value += f"**{cmd_dict['name']}**: {cmd_dict['desc']}\n"
+    embed.add_field(name="Command List", value=field_value[:-1])
     await message.channel.send(embed=embed)
 
 cmds = [roles_cmd, help_cmd, cmdhelp_cmd]
