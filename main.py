@@ -32,7 +32,7 @@ async def cmdhelp_cmd(msg):
         await msg.channel.send("Given command does not exist.")
     else:
         embed = discord.Embed()
-        embed.add_field(name=f"Command Help for {cmd_info['name']}", value=f"{cmd_info['desc']}\nFormat: {cmd_info['format']}")
+        embed.add_field(name=f"**Command Help for {cmd_info['name']}**", value=f"{cmd_info['desc']}\nFormat: {cmd_info['format']}")
         await msg.channel.send(embed=embed)
 
 def get_roles(msg):
@@ -83,7 +83,7 @@ async def help_cmd(message):
     field_value = ""
     for cmd_dict in cmd_dicts:
         field_value += f"**{cmd_dict['name']}:** {cmd_dict['desc']}\n"
-    embed.add_field(name="Command List", value=field_value[:-1])
+    embed.add_field(name="**Command List**", value=field_value[:-1])
     await message.channel.send(embed=embed)
 
 cmds = [roles_cmd, help_cmd, cmdhelp_cmd]
