@@ -24,16 +24,16 @@ def get_cmd_info(cmd):
             return {"name":cmd_dict["name"], "desc":cmd_dict["desc"], "format":cmd_formats[index]}
     return None
 
-async def cmdhelp_cmd(message):
-    message = message.content
+async def cmdhelp_cmd(msg):
+    message = msg.content
     if (not message.startswith("!cmdhelp ")):
         return
     cmd = message[9:].strip()
     cmd_info = get_cmd_info(cmd)
     if (cmd_info == None):
-        await message.channel.send("Given command does not exist.")
+        await msg.channel.send("Given command does not exist.")
     else:
-        await message.channel.send(f"{cmd_info['name']}: {cmd_info['desc']}\nFormat: {cmd_info['format']}")
+        await msg.channel.send(f"{cmd_info['name']}: {cmd_info['desc']}\nFormat: {cmd_info['format']}")
 
 def get_roles(msg):
     message = msg.content
